@@ -1,0 +1,236 @@
+/* MAIN CAROUSEL CONTAINER */
+.abc-banner-carousel {
+    touch-action: pan-y; /* Add this to root element */
+}
+
+.abc-carousel-wrapper {
+    overflow: visible !important; /* Critical fix */
+    touch-action: pan-y; /* Add this */
+    padding: 0 15px;
+}
+
+.abc-carousel-inner {
+    touch-action: pan-y; /* Keep this */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Add this new class */
+.abc-carousel-inner.no-transition {
+    transition: none !important;
+}
+
+
+
+
+.abc-slide {
+    /* Ensure slides can't be selected during swipe */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Add these new rules to your existing CSS */
+.abc-slide-image {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.abc-slide-image.abc-image-loaded {
+    opacity: 1;
+}
+
+.abc-slide-image.customFade-active {
+    /* Keep your existing fade styles */
+    opacity: 1;
+}
+
+// Add to your CSS:
+.abc-carousel-inner {
+    transition: transform var(--animation-speed, 500ms) ease;
+}
+
+
+/* Main carousel container */
+.abc-banner-carousel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 1rem 0 2rem;
+}
+
+/* Carousel wrapper */
+.abc-carousel-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 0 15px; /* Add padding to create space for peek */
+}
+
+/* Carousel inner container */
+.abc-carousel-inner {
+    display: flex;
+    flex-direction: row;
+    backface-visibility: hidden;
+    transition: transform 0.2s ease-in-out !important;
+    padding: 0 5px; /* Add some inner padding */
+}
+
+/* Individual slides */
+.abc-slide {
+    flex: 0 0 auto;
+    width: 76.92308%; /* Match Souled Store's width */
+    margin-right: 8px; /* Space between slides */
+    box-sizing: border-box;
+    user-select: none;
+    backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    scroll-snap-align: start;
+}
+
+/* Slide image container */
+.abc-slide-image-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 120%; /* Adjust aspect ratio */
+    overflow: hidden;
+    border-radius: 0.3rem;
+}
+
+/* Slide images */
+.abc-slide-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity 0.3s ease;
+}
+
+/* ============================================= */
+/* CAROUSEL NAVIGATION ARROWS - GUARANTEED VISIBLE */
+/* ============================================= */
+
+/* Base arrow styles with maximum specificity */
+.abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev,
+.abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next {
+    /* Positioning */
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1000 !important;
+    
+    /* Size and appearance */
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    
+    /* Content alignment */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* Interaction */
+    cursor: pointer !important;
+    opacity: 1 !important; /* Always visible */
+    visibility: visible !important;
+    pointer-events: auto !important;
+    
+    /* Reset any potential inherited styles */
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+}
+
+/* Position the arrows */
+.abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev {
+    left: 15px !important;
+}
+
+.abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next {
+    right: 15px !important;
+}
+
+/* SVG styles - ensure visibility */
+.abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev svg,
+.abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: #000 !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Hover effects for desktop */
+@media (hover: hover) {
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev,
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next {
+        opacity: 0.8 !important;
+        transition: opacity 0.3s ease !important;
+    }
+    
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev:hover,
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next:hover {
+        opacity: 1 !important;
+        background: rgba(255, 255, 255, 1) !important;
+    }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 991px) {
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev,
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev {
+        left: 8px !important;
+    }
+    
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next {
+        right: 8px !important;
+    }
+    
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-prev svg,
+    .abc-banner-carousel > .abc-carousel-wrapper > .abc-carousel-next svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+/* ============================================= */
+/* CAROUSEL LAYOUT STYLES */
+/* ============================================= */
+
+.abc-carousel-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+    .abc-carousel-wrapper {
+        padding: 0 30px;
+    }
+    
+    .abc-slide {
+        width: calc(33.333333% - 10px);
+        margin-right: 15px;
+    }
+    
+    .abc-slide-image-container {
+        padding-bottom: 95.83%;
+    }
+}
